@@ -6,8 +6,11 @@ const UpdateUser = ({
   onClose,
   userId,
   fetchData,
+  userData,
   setSuccessMessage,
 }) => {
+  
+
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -16,20 +19,19 @@ const UpdateUser = ({
   });
 
   useEffect(() => {
-    if (userId) {
-      const fetchUserData = async () => {
-        try {
-          const response = await axios.get(
-            `http://localhost:4000/api/users/${userId}`
-          );
-          setFormData(response.data);
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        }
-      };
-      fetchUserData();
+    if (userData) {
+     
+      console.log("Updating formData with userData:", userData);
+      setFormData({
+        name: userData.name || "",
+        age: userData.age || "",
+        phoneno: userData.phoneno || "",
+        address: userData.address || "",
+      });
     }
-  }, [userId]);
+  }, [userData]);
+
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,13 +40,12 @@ const UpdateUser = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await axios.put(
-        `http://localhost:4000/api/users/update`,
-        { id: userId, ...formData }
-      );
-      setSuccessMessage(response.data.message); // Set success message
+      const response = await axios.put(`http://localhost:4000/api/users/update`, {
+        id: userId,
+        ...formData,
+      });
+      setSuccessMessage(response.data.message);
       fetchData();
       onClose();
     } catch (error) {
@@ -52,6 +53,7 @@ const UpdateUser = ({
     }
   };
 
+  // If not showing update modal, return null
   if (!showUpdate) return null;
 
   return (
@@ -60,10 +62,7 @@ const UpdateUser = ({
         <h2 className="text-xl font-semibold mb-4">Update User</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="name"
-            >
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
               Name
             </label>
             <input
@@ -75,10 +74,7 @@ const UpdateUser = ({
             />
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="age"
-            >
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="age">
               Age
             </label>
             <input
@@ -91,10 +87,7 @@ const UpdateUser = ({
             />
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="phoneno"
-            >
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phoneno">
               Phone Number
             </label>
             <input
@@ -106,10 +99,7 @@ const UpdateUser = ({
             />
           </div>
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="address"
-            >
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
               Address
             </label>
             <input

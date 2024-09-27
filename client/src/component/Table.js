@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import UpdateUser from "./UpdateUser";
 import DeleteUser from "./DeleteUser";
-import ConfirmationModal from "./ConfirmationModal"; // Ensure this import is correct
+import ConfirmationModal from "./ConfirmationModal"; 
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -45,6 +45,10 @@ const Table = ({ data, fetchData }) => {
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(data.length / itemsPerPage);
+
+    // Get the user data for the selected user ID
+    const userData = data.find(user => user.id === userId);
+    console.log("Selected userData:", userData); // Debugging log
 
     return (
         <div className="overflow-x-auto">
@@ -131,7 +135,8 @@ const Table = ({ data, fetchData }) => {
                 onClose={handleClose}
                 userId={userId}
                 fetchData={fetchData}
-                setSuccessMessage={setSuccessMessage} // Pass the success message setter
+                userData={userData} // Pass the user data for the selected user
+                setSuccessMessage={setSuccessMessage}
             />
 
             {/* Confirmation Modal */}
