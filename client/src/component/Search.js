@@ -4,7 +4,6 @@ import axios from "axios";
 
 const Search = ({ fetchData, setData, apiUrl }) => {
   const [searchTerm, setSearchTerm] = useState("");
-
   const handleSearch = async () => {
     if (searchTerm) {
       try {
@@ -24,6 +23,8 @@ const Search = ({ fetchData, setData, apiUrl }) => {
     setSearchTerm("");
     fetchData();
   };
+
+ 
 
   return (
     <>

@@ -7,6 +7,7 @@ import "./index.css";
 import Login from "./component/Login";
 import Signup from "./component/Signup";
 
+
 const App = () => {
   const [data, setData] = useState([]);
   const [showData, setShowData] = useState(false);
@@ -43,6 +44,11 @@ const App = () => {
     setIsAuthenticated(true); 
   };
 
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setData([]); 
+  };
+
   const toggleSignup = () => {
     setIsSignupVisible(!isSignupVisible);
   };
@@ -66,6 +72,12 @@ const App = () => {
               setData={setData} 
               apiUrl={apiUrl} 
             />
+            <button
+              onClick={handleLogout}
+              className="bg-red-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-red-700 transition duration-300"
+            >
+              Logout
+            </button>
           </div>
 
           <div className="w-full max-w-4xl">

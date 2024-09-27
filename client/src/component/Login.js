@@ -36,7 +36,6 @@ function Login({ onLogin, apiUrl, onToggleSignup }) {
               placeholder='Enter Email'
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
               required
-              autoComplete="off" 
             />
           </div>
           <div className="mb-6">
@@ -49,7 +48,6 @@ function Login({ onLogin, apiUrl, onToggleSignup }) {
               placeholder='Enter Password'
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
               required
-              autoComplete="off" 
             />
           </div>
           <button
