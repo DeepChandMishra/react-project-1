@@ -8,20 +8,22 @@ function AddUser({ showData, onClose, fetchData }) {
     phoneno: "",
     address: "",
   });
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setSuccessMessage(""); // Clear the message on input change
   };
 
   const handleSubmit = async (e) => {
-    console.log("Form Data Being Sent:", formData);
     e.preventDefault();
     try {
       const url = `http://localhost:4000/api/createUser`;
       await axios.post(url, formData);
+      setSuccessMessage("User added successfully!"); // Set the success message
       fetchData(); 
-      onClose(); 
+      setFormData({ name: "", age: "", phoneno: "", address: "" }); // Reset the form
     } catch (error) {
       console.error("Error adding user:", error);
     }
@@ -33,6 +35,9 @@ function AddUser({ showData, onClose, fetchData }) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-4 rounded-lg shadow-lg w-11/12 md:w-1/3 my-8">
             <h1 className="text-lg mb-3 text-center font-bold">User Info</h1>
+            {successMessage && (
+              <p className="text-green-600 text-center mb-4">{successMessage}</p>
+            )}
             <form onSubmit={handleSubmit}>
               <div className="mb-1">
                 <label className="block mb-1 font-medium">Name</label>

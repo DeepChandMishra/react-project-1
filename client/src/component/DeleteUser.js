@@ -1,16 +1,12 @@
 // DeleteUser.js
 import axios from 'axios';
 
-const DeleteUser = async (id, fetchData) => {
-    if (!window.confirm('Are you sure you want to delete this user?')) {
-        return; 
-    }
-    
+const DeleteUser = async (id, fetchData, setSuccessMessage) => {
     try {
         const response = await axios.delete('http://localhost:4000/api/users/delete', {
             data: { id },
         });
-        alert(response.data.message); 
+        setSuccessMessage(response.data.message); // Set success message
         fetchData();
     } catch (error) {
         alert(error.response.data.error || 'Failed to delete user'); 
