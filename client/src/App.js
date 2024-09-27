@@ -58,7 +58,7 @@ const App = () => {
       {isAuthenticated ? (
         <>
           <h1 className="text-white text-5xl font-bold text-center mb-4">People Hub</h1>
-          <p className="text-gray-300 text-lg text-center mb-4">Find and manage users easily.</p>
+          <p className="text-gray-300 text-lg text-center mb-4">Find and manage users easily..</p>
           
           <div className="flex mb-4 space-x-2 justify-center">
             <button
